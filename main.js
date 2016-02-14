@@ -17,6 +17,7 @@ const gcloud = require('gcloud')({
 });
 
 const gce = gcloud.compute();
+const zone = gce.zone('us-central1-a');
 
 //test
 app.get('/', (req, res) => {
@@ -31,6 +32,7 @@ app.get("/getVMs", (req, res) => {
         }
         else {
             console.log(vms);
+            res.send(vms);
         }
     });
 });
