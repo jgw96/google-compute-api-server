@@ -36,5 +36,5 @@ app.get("/getVMs", (req, res) => {
 });
 
 app.listen(8080, () => {
-    console.log('Example app listening on port 8100!');
+    console.log('Example app listening on port 8080!');
 });
