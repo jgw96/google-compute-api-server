@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Authenticating on a global basis.
-const projectId = process.env.GCLOUD_PROJECT_ID; // E.g. 'grape-spaceship-123'
+const projectId = "cloud-node-server"; // E.g. 'grape-spaceship-123'
 const gcloud = require('gcloud')({
     projectId: projectId
 });
@@ -35,6 +35,6 @@ app.get("/getVMs", (req, res) => {
     });
 });
 
-app.listen(8100, () => {
+app.listen(8080, () => {
     console.log('Example app listening on port 8100!');
 });
