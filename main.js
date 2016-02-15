@@ -24,8 +24,9 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+//get all vms
 app.get("/getVMs", (req, res) => {
-    gce.getVMs( (err, vms) => {
+    gce.getVMs((err, vms) => {
         // `vms` is an array of `VM` objects.
         if (err) {
             console.log(err);
@@ -33,6 +34,37 @@ app.get("/getVMs", (req, res) => {
         else {
             console.log(vms);
             res.send(vms);
+        }
+    });
+});
+
+//stop a vm
+app.post("/stop", (req, res) => {
+    const vm = zone.vm(req.body.name);
+
+    vm.stop( (err, operation, apiResponse) => {
+        // `operation` is an Operation object that can be used to check the status
+        // of the request.
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(operation);
+            res.send("VM stopped");
+        }
+    });
+});
+
+app.post("/start", (req, res) => {
+    const vm = zone.vm(req.body.name);
+    
+    vm.start((err, operation, apiResponse) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(operation);
+            res.send("VM started");
         }
     });
 });
