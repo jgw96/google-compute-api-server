@@ -42,7 +42,7 @@ app.get("/getVMs", (req, res) => {
 app.post("/stop", (req, res) => {
     const vm = zone.vm(req.body.name);
 
-    vm.stop( (err, operation, apiResponse) => {
+    vm.stop((err, operation, apiResponse) => {
         // `operation` is an Operation object that can be used to check the status
         // of the request.
         if (err) {
@@ -55,9 +55,10 @@ app.post("/stop", (req, res) => {
     });
 });
 
+//start a vm
 app.post("/start", (req, res) => {
     const vm = zone.vm(req.body.name);
-    
+
     vm.start((err, operation, apiResponse) => {
         if (err) {
             console.log(err);
@@ -65,6 +66,25 @@ app.post("/start", (req, res) => {
         else {
             console.log(operation);
             res.send("VM started");
+        }
+    });
+});
+
+//create a vm
+app.post("/make", (req, res) => {
+    const config = {
+        os: req.body.os,
+        http: req.body.http,
+        https: req.body.https
+    };
+    
+    zone.creatVM(req.body.name, config, (err, vm, operation, apiResponse) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(vm);
+            res.send(vm);
         }
     });
 });
